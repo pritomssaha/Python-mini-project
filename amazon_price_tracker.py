@@ -7,12 +7,12 @@ email = os.environ['EMAIL']
 password = os.environ['PASSWORD']
 
 
-def send_email():
+def send_email(price):
     connection = smtplib.SMTP("smtp.gmail.com")
     connection.starttls()
     connection.login(email, password)
     connection.sendmail(from_addr=email, to_addrs=email,
-                        msg=f"Subject: Hello \n\n iss satellite is close to your location")
+                        msg=f"Subject: Price update \n\n The price is now ${price}")
     connection.close()
 
 
@@ -33,4 +33,4 @@ span = soup.findAll(name="span", class_="a-offscreen")
 price = float(span[1].getText().split("$")[1])
 
 if price < 100:
-    send_email()
+    send_email(price)
